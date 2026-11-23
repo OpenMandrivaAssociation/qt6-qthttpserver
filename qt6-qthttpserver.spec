@@ -5,8 +5,8 @@
 %define _qtdir %{_libdir}/qt%{major}
 
 Name:		qt6-qthttpserver
-Version:	6.12.0
-Release:	%{?beta:0.%{beta}.}%{?snapshot:0.%{snapshot}.}2
+Version:	6.12.1
+Release:	%{?beta:0.%{beta}.}%{?snapshot:0.%{snapshot}.}1
 %if 0%{?snapshot:1}
 # "git archive"-d from "dev" branch of git://code.qt.io/qt/qthttpserver.git
 Source:		qthttpserver-%{?snapshot:%{snapshot}}%{!?snapshot:%{version}}.tar.zst
@@ -24,13 +24,6 @@ BuildRequires:	qt%{major}-cmake
 License:	LGPLv3/GPLv3/GPLv2
 
 %patchlist
-# CVE-2026-110944: a chunked request with an endless chunk-size line
-# grew the fragment buffer without a ceiling, and a bad chunk size was
-# parsed without checking conversion. Cap the line and reject a size
-# that does not fit qsizetype. 6.12: d0b683915dd1, 3376ff1f1fde,
-# QTBUG-150270
-qthttpserver-6.12.0-cve-2026-110944-0001.patch
-qthttpserver-6.12.0-cve-2026-110944-0002.patch
 
 %description
 Qt %{major} HTTP Server module
